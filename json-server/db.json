@@ -1,36 +1,84 @@
 {
-  "posts": [
-    {
-      "id": "1",
-      "title": "a title",
-      "views": 100
-    },
-    {
-      "id": "2",
-      "title": "another title",
-      "views": 200
-    }
-  ],
-  "comments": [
-    {
-      "id": "1",
-      "text": "a comment about post 1",
-      "postId": "1"
-    },
-    {
-      "id": "2",
-      "text": "another comment about post 1",
-      "postId": "1"
-    }
-  ],
-  "profile": {
-    "name": "typicode"
-  },
   "users": [
+
+  ],
+  "songs": [
     {
-      "email": "truongtai8386@gmail.com",
-      "password": "$2a$10$1aY91l6vBWANyoRVMQdqUu1.ThtYJbtWfE9g6TIlGYqP6cX5QWoMW",
-      "id": 1
+      "id": 1,
+      "name": "Muộn rồi mà sao còn",
+      "singer": "Sơn Tùng MTP",
+      "source": "https://ia802303.us.archive.org/28/items/muon-roi-ma-sao-con-son-tung-m-tp-di-dau-cung-nghe-v.-a-playlist-nhac-cua-tui-2/Mu%E1%BB%99n%20R%E1%BB%93i%20M%C3%A0%20Sao%20C%C3%B2n%20-%20S%C6%A1n%20T%C3%B9ng%20M-TP%20-%20%C4%90i%20%C4%90%C3%A2u%20C%C5%A9ng%20Nghe%20-%20V.A%20-%20Playlist%20NhacCuaTui_2.mp3",
+      "image": "https://upload.wikimedia.org/wikipedia/vi/9/93/S%C6%A1n_T%C3%B9ng_M-TP_-_Mu%E1%BB%99n_r%E1%BB%93i_m%C3%A0_sao_c%C3%B2n.png"
+    },
+    {
+      "id": "2",
+      "name": "Cuối cùng thì",
+      "singer": "Jack - J97",
+      "source": "https://archive.org/download/cuoi-cung-thi-live-jack-j-97-v-pop-essentials-v.-a-playlist-nhac-cua-tui/Cu%E1%BB%91i%20C%C3%B9ng%20Th%C3%AC%20%28Live%29%20-%20Jack%20-%20J97%20-%20V-POP%20Essentials%20-%20V.A%20-%20Playlist%20NhacCuaTui.mp3",
+      "image": "https://i.ytimg.com/vi/red9YvYlPWg/maxresdefault.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Beat It",
+      "singer": "Michael Jackson",
+      "source": "https://dn721505.ca.archive.org/0/items/michael-jackson-1995-history-past-present-and-future-book1-uncensored-release-2-cd-320/10.%20Beat%20It.mp3",
+      "image": "https://hips.hearstapps.com/hmg-prod/images/michael-jackson-performs-in-concert-circa-1986-news-photo-1680813884.jpg?crop=0.954xw:0.919xh;0,0.0811xh&resize=980:*"
+    },
+    {
+      "id": 4,
+      "name": "Beautiful Monster",
+      "singer": "Soobin Hoàng Sơn",
+      "source": "https://archive.org/download/beautiful-monster-soobin-binz-tiec-tung-thoi-v.-a-playlist-nhac-cua-tui/Beautiful%20Monster%20-%20SOOBIN%2C%20Binz%20-%20Ti%E1%BB%87c%20T%C3%B9ng%20Th%C3%B4i%20-%20V.A%20-%20Playlist%20NhacCuaTui.mp3",
+      "image": "https://i1.sndcdn.com/artworks-MeW01yWjSppYyH54-sowHBA-t500x500.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Chạy ngay đi",
+      "singer": "Sơn Tùng MTP",
+      "source": "https://ia800504.us.archive.org/9/items/chay-ngay-di-son-tung-m-tp-top-100-v-pop-hot-2007-2022-15-nam-nhac-cua-tui-v.-a-_202309/Ch%E1%BA%A1y%20Ngay%20%C4%90i%20-%20S%C6%A1n%20T%C3%B9ng%20M-TP%20-%20Top%20100%20V-Pop%20Hot%202007-2022%20-%2015%20N%C4%83m%20NhacCuaTui%20-%20V.A%20-%20Playlist%20NhacCuaTui.mp3",
+      "image": "https://upload.wikimedia.org/wikipedia/vi/8/85/Chay_ngay_di.png"
+    },
+    {
+      "id": 6,
+      "name": "Ngôi sao cô đơn",
+      "singer": "Jack - J97",
+      "source": "https://archive.org/download/ngoi-sao-co-don-jack-j-97-trao-luu-nhac-hot-v.-a-playlist-nhac-cua-tui/Ng%C3%B4i%20Sao%20C%C3%B4%20%C4%90%C6%A1n%20-%20Jack%20-%20J97%20-%20Tr%C3%A0o%20L%C6%B0u%20Nh%E1%BA%A1c%20Hot%20-%20V.A%20-%20Playlist%20NhacCuaTui.mp3",
+      "image": "https://image.plo.vn/w1000/Uploaded/2025/vocgmvpi/2022_07_20/jack2-7417.jpg.webp"
+    },
+    {
+      "id": 7,
+      "name": "Anh đã ổn hơn",
+      "singer": "RPT MCK",
+      "source": "https://archive.org/download/anh-da-on-hon-rpt-mck-gen-gi-gen-z-v.-a-playlist-nhac-cua-tui/Anh%20%C4%90%C3%A3%20%E1%BB%94n%20H%C6%A1n%20-%20RPT%20MCK%20-%20Gen%20G%C3%AC%20Gen%20Z%20-%20V.A%20-%20Playlist%20NhacCuaTui.mp3",
+      "image": "https://i.ytimg.com/vi/dz6xe0xXqYE/maxresdefault.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Chìm sâu",
+      "singer": "RPT MCK",
+      "source": "https://archive.org/download/chim-sau-rpt-mck-trung-tran-hit-viet-quoc-dan-v.-a-playlist-nhac-cua-tui/Ch%C3%ACm%20S%C3%A2u%20-%20RPT%20MCK%2C%20Trung%20Tr%E1%BA%A7n%20-%20Hit%20Vi%E1%BB%87t%20Qu%E1%BB%91c%20D%C3%A2n%20-%20V.A%20-%20Playlist%20NhacCuaTui.mp3",
+      "image": "https://i.scdn.co/image/ab67616d0000b2737ca44b51c2660ee2a78fe114"
+    },
+    {
+      "id": 9,
+      "name": "Tháng năm (Special Performance)",
+      "singer": "Soobin Hoàng Sơn",
+      "source": "https://dn720306.ca.archive.org/0/items/thang-nam-special-performance-soobin-hoang-son-slim-v-di-dau-cung-nghe-v.-a-playlist-nhac-cua-tui/Th%C3%A1ng%20N%C4%83m%20%28Special%20Performance%29%20-%20Soobin%20Ho%C3%A0ng%20S%C6%A1n%2C%20SlimV%20-%20%C4%90i%20%C4%90%C3%A2u%20C%C5%A9ng%20Nghe%20-%20V.A%20-%20Playlist%20NhacCuaTui.mp3",
+      "image": "https://i1.sndcdn.com/artworks-6YI0Zcuik9qSdNEy-pyq7zg-t500x500.jpg"
+    },
+    {
+      "id": 10,
+      "name": "Big city boi",
+      "singer": "Binz",
+      "source": "https://archive.org/download/big-city-boi-binz-touliver/Big%20City%20Boi%20-%20Binz%2C%20Touliver.mp3",
+      "image": "https://photo-resize-zmp3.zadn.vn/w600_r1x1_jpeg/cover/5/a/5/1/5a5164496ababbca1496193ec8b8afb1.jpg"
+    },
+    {
+      "id": 11,
+      "name": "Don't Break My Heart",
+      "singer": "Binz",
+      "source": "https://archive.org/download/dont-break-my-heart-binz-het-nuoc-cham-v.-a-playlist-nhac-cua-tui_202304/Don%27t%20Break%20My%20Heart%20-%20Binz%20-%20H%E1%BA%BFt%20N%C6%B0%E1%BB%9Bc%20Ch%E1%BA%A5m%21%20-%20V.A%20-%20Playlist%20NhacCuaTui.mp3",
+      "image": "https://photo-resize-zmp3.zmdcdn.me/w256_r1x1_jpeg/cover/2/3/a/3/23a319ae4abfa44026f1cfe9d3de9387.jpg"
     }
   ]
 }
