@@ -8,15 +8,19 @@ class Auth {
     var data = user.toJson();
 
     var dio = Dio();
-    var response = await dio.request(
-      "http://localhost:3000/register",
-      options: Options(method: 'POST', headers: headers),
-      data: data,
-    );
+    try {
+      var response = await dio.request(
+        "http://localhost:3000/register",
+        options: Options(method: 'POST', headers: headers),
+        data: data,
+      );
 
-    if (response.statusCode == 201) {
-      return Token.fromJson(response.data);
-    } else {
+      if (response.statusCode == 201) {
+        return Token.fromJson(response.data);
+      } else {
+        return null;
+      }
+    } on DioException catch (e) {
       return null;
     }
   }
