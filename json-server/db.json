@@ -1,6 +1,16 @@
 {
   "users": [
-
+    {
+      "email": "tantai2204@gmail.com",
+      "password": "$2a$10$x/J9s7Y6W266M12ANhBPHee70IsoYdYmTQoSvSEYiUlCYnLofjHQ.",
+      "id": 1,
+      "name": "Trương Văn Tấn Tài",
+      "nickname": "taidz",
+      "age": 21,
+      "isMale": true,
+      "address": "Huế",
+      "phoneNumber": "0123456789"
+    }
   ],
   "songs": [
     {
