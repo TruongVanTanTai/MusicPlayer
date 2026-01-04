@@ -28,18 +28,41 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Scaffold(body: RegisterForm()));
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Đăng ký tài khoản'),
+          centerTitle: true,
+          shadowColor: Color(0xFF1DB954),
+        ),
+        body: RegisterForm(),
+      ),
+    );
   }
 
   Widget RegisterForm() {
     return Form(
       key: formKey,
       child: ListView(
+        padding: EdgeInsets.all(24),
         children: [
-          Text('Umac'),
+          Text(
+            'Umac',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 40,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF1DB954),
+            ),
+          ),
+          SizedBox(height: 40),
           TextFormField(
             controller: nameController,
-            decoration: InputDecoration(label: Text('Họ và tên')),
+            decoration: InputDecoration(
+              label: Text('Họ và tên'),
+              prefixIcon: Icon(Icons.person, color: Color(0xFF1DB954)),
+              border: OutlineInputBorder(borderSide: BorderSide()),
+            ),
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Họ và tên không được để trống';
@@ -47,9 +70,14 @@ class _RegisterPageState extends State<RegisterPage> {
               return null;
             },
           ),
+          SizedBox(height: 24),
           TextFormField(
             controller: nicknameController,
-            decoration: InputDecoration(label: Text('Bí danh')),
+            decoration: InputDecoration(
+              label: Text('Bí danh'),
+              prefixIcon: Icon(Icons.edit, color: Color(0xFF1DB954)),
+              border: OutlineInputBorder(borderSide: BorderSide()),
+            ),
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Bí danh không được để trống';
@@ -57,10 +85,15 @@ class _RegisterPageState extends State<RegisterPage> {
               return null;
             },
           ),
+          SizedBox(height: 24),
           TextFormField(
             controller: ageController,
             keyboardType: TextInputType.number,
-            decoration: InputDecoration(label: Text('Tuổi')),
+            decoration: InputDecoration(
+              label: Text('Tuổi'),
+              prefixIcon: Icon(Icons.cake_rounded, color: Color(0xFF1DB954)),
+              border: OutlineInputBorder(borderSide: BorderSide()),
+            ),
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Tuổi không được để trống';
@@ -71,6 +104,7 @@ class _RegisterPageState extends State<RegisterPage> {
               return null;
             },
           ),
+          SizedBox(height: 24),
           CheckboxListTile(
             controlAffinity: ListTileControlAffinity.leading,
             title: Text('Giới tính nam'),
@@ -81,9 +115,14 @@ class _RegisterPageState extends State<RegisterPage> {
               });
             },
           ),
+          SizedBox(height: 24),
           TextFormField(
             controller: addressController,
-            decoration: InputDecoration(label: Text('Địa chỉ')),
+            decoration: InputDecoration(
+              label: Text('Địa chỉ'),
+              prefixIcon: Icon(Icons.home, color: Color(0xFF1DB954)),
+              border: OutlineInputBorder(borderSide: BorderSide()),
+            ),
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Địa chỉ không được để trống';
@@ -91,9 +130,14 @@ class _RegisterPageState extends State<RegisterPage> {
               return null;
             },
           ),
+          SizedBox(height: 24),
           TextFormField(
             controller: phoneNumberController,
-            decoration: InputDecoration(label: Text('Số điện thoại')),
+            decoration: InputDecoration(
+              label: Text('Số điện thoại'),
+              prefixIcon: Icon(Icons.phone, color: Color(0xFF1DB954)),
+              border: OutlineInputBorder(borderSide: BorderSide()),
+            ),
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Số điện thoại không được để trống';
@@ -104,9 +148,14 @@ class _RegisterPageState extends State<RegisterPage> {
               return null;
             },
           ),
+          SizedBox(height: 24),
           TextFormField(
             controller: emailController,
-            decoration: InputDecoration(label: Text('Email')),
+            decoration: InputDecoration(
+              label: Text('Email'),
+              prefixIcon: Icon(Icons.email, color: Color(0xFF1DB954)),
+              border: OutlineInputBorder(borderSide: BorderSide()),
+            ),
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Email không được để trống';
@@ -119,12 +168,15 @@ class _RegisterPageState extends State<RegisterPage> {
               return null;
             },
           ),
+          SizedBox(height: 24),
           TextFormField(
             controller: passwordController,
             obscureText: isObscurePassword,
             decoration: InputDecoration(
               label: Text('Mật khẩu'),
-              suffix: IconButton(
+              prefixIcon: Icon(Icons.lock, color: Color(0xFF1DB954)),
+              border: OutlineInputBorder(borderSide: BorderSide()),
+              suffixIcon: IconButton(
                 onPressed: () {
                   setState(() {
                     isObscurePassword = !isObscurePassword;
@@ -145,12 +197,15 @@ class _RegisterPageState extends State<RegisterPage> {
               return null;
             },
           ),
+          SizedBox(height: 24),
           TextFormField(
             controller: confirmedPasswordController,
             obscureText: isObscureConfirmedPassword,
             decoration: InputDecoration(
               label: Text('Xác nhận mật khẩu'),
-              suffix: IconButton(
+              prefixIcon: Icon(Icons.lock_person, color: Color(0xFF1DB954)),
+              border: OutlineInputBorder(borderSide: BorderSide()),
+              suffixIcon: IconButton(
                 onPressed: () {
                   setState(() {
                     isObscureConfirmedPassword = !isObscureConfirmedPassword;
@@ -176,7 +231,12 @@ class _RegisterPageState extends State<RegisterPage> {
               return null;
             },
           ),
+          SizedBox(height: 24),
           ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Color(0xFF1DB954),
+              foregroundColor: Colors.black,
+            ),
             onPressed: () async {
               if (formKey.currentState!.validate()) {
                 User user = User(
@@ -206,7 +266,15 @@ class _RegisterPageState extends State<RegisterPage> {
             },
             child: Text('Đăng ký'),
           ),
-          ElevatedButton(onPressed: () {}, child: Text('Đã có tài khoản')),
+          SizedBox(height: 8),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Color(0xFF1DB954),
+              foregroundColor: Colors.black,
+            ),
+            onPressed: () {},
+            child: Text('Đã có tài khoản'),
+          ),
         ],
       ),
     );
