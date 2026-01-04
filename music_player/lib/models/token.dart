@@ -11,7 +11,7 @@ class Token {
   @JsonKey(name: "user")
   late User user;
 
-  Token({required accessToken, required user});
+  Token({required this.accessToken, required this.user});
 
   factory Token.fromJson(Map<String, dynamic> json) => _$TokenFromJson(json);
 

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:music_player/models/token.dart';
 import 'package:music_player/models/user.dart';
-import 'package:music_player/services/auth.dart';
+import 'package:music_player/services/auth-service.dart';
+import 'package:music_player/views/login-page.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -47,7 +48,7 @@ class _RegisterPageState extends State<RegisterPage> {
         padding: EdgeInsets.all(24),
         children: [
           Text(
-            'Umac',
+            'Umac 🎧',
             textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 40,
@@ -109,6 +110,7 @@ class _RegisterPageState extends State<RegisterPage> {
             controlAffinity: ListTileControlAffinity.leading,
             title: Text('Giới tính nam'),
             value: isMale,
+            checkColor: Colors.white,
             onChanged: (value) {
               setState(() {
                 isMale = !isMale;
@@ -153,7 +155,7 @@ class _RegisterPageState extends State<RegisterPage> {
             controller: emailController,
             decoration: InputDecoration(
               label: Text('Email'),
-              prefixIcon: Icon(Icons.email, color: Color(0xFF1DB954)),
+              prefixIcon: Icon(Icons.alternate_email, color: Color(0xFF1DB954)),
               border: OutlineInputBorder(borderSide: BorderSide()),
             ),
             validator: (value) {
@@ -250,13 +252,14 @@ class _RegisterPageState extends State<RegisterPage> {
                   password: passwordController.text,
                 );
 
-                Auth auth = Auth();
-                Token? token = await auth.register(user);
+                AuthService authService = AuthService();
+                Token? token = await authService.register(user);
 
                 if (token != null) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Đăng ký thành công')),
                   );
+                  Navigator.pop(context);
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Đăng ký thất bại')),
@@ -272,7 +275,12 @@ class _RegisterPageState extends State<RegisterPage> {
               backgroundColor: Color(0xFF1DB954),
               foregroundColor: Colors.black,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LoginPage()),
+              );
+            },
             child: Text('Đã có tài khoản'),
           ),
         ],

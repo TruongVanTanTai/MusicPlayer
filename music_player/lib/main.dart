@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:music_player/views/register-page.dart';
+import 'package:music_player/views/login-page.dart';
 
 void main() {
   runApp(MyApp());
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
           onSurface: Colors.black,
         ),
       ),
-      home: RegisterPage(),
+      home: LoginPage(),
     );
   }
 }

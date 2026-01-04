@@ -2,7 +2,7 @@
   "users": [
     {
       "email": "tantai2204@gmail.com",
-      "password": "$2a$10$tbcqzsJ9txR5hRXojzT1LeVCc8Bma.m51f6fEz.7ItVnpaQiYLhL6",
+      "password": "$2a$10$ZvjsyAPwKdKBJ6TpXMAGCeycWFNYs2/wcJoRhM3GrvRokgyBzNFQm",
       "id": 1,
       "name": "Trương Văn Tấn Tài",
       "nickname": "taidz",
@@ -18,10 +18,10 @@
       "name": "Muộn rồi mà sao còn",
       "singer": "Sơn Tùng MTP",
       "source": "https://ia802303.us.archive.org/28/items/muon-roi-ma-sao-con-son-tung-m-tp-di-dau-cung-nghe-v.-a-playlist-nhac-cua-tui-2/Mu%E1%BB%99n%20R%E1%BB%93i%20M%C3%A0%20Sao%20C%C3%B2n%20-%20S%C6%A1n%20T%C3%B9ng%20M-TP%20-%20%C4%90i%20%C4%90%C3%A2u%20C%C5%A9ng%20Nghe%20-%20V.A%20-%20Playlist%20NhacCuaTui_2.mp3",
-      "image": "https://upload.wikimedia.org/wikipedia/vi/9/93/S%C6%A1n_T%C3%B9ng_M-TP_-_Mu%E1%BB%99n_r%E1%BB%93i_m%C3%A0_sao_c%C3%B2n.png"
+      "image": "https://cdn2.tuoitre.vn/thumb_w/480/ttc/r/2021/04/30/173292019-315063713309362-6329146106221360649-n-00272556-1619793786.jpeg"
     },
     {
-      "id": "2",
+      "id": 2,
       "name": "Cuối cùng thì",
       "singer": "Jack - J97",
       "source": "https://archive.org/download/cuoi-cung-thi-live-jack-j-97-v-pop-essentials-v.-a-playlist-nhac-cua-tui/Cu%E1%BB%91i%20C%C3%B9ng%20Th%C3%AC%20%28Live%29%20-%20Jack%20-%20J97%20-%20V-POP%20Essentials%20-%20V.A%20-%20Playlist%20NhacCuaTui.mp3",

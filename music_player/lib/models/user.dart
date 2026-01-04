@@ -29,7 +29,7 @@ class User {
   late String email;
 
   @JsonKey(name: "password")
-  late String password;
+  late String? password;
 
   User({
     this.id,
