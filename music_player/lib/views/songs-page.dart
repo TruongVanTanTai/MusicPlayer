@@ -7,6 +7,7 @@ import 'package:music_player/models/position-data.dart';
 import 'package:music_player/models/song.dart';
 import 'package:music_player/models/token.dart';
 import 'package:music_player/services/song-service.dart';
+import 'package:music_player/views/user-detail-page.dart';
 import 'package:rxdart/rxdart.dart';
 
 class SongsPage extends StatefulWidget {
@@ -47,7 +48,59 @@ class _SongsPageState extends State<SongsPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child: Scaffold(body: MusicPlayer()));
+    return SafeArea(
+      child: Scaffold(
+        drawer: Drawer(
+          child: ListView(
+            padding: EdgeInsets.zero,
+            children: [
+              const DrawerHeader(
+                decoration: BoxDecoration(color: Color(0xFF1DB954)),
+                child: Expanded(
+                  child: Center(
+                    child: Text(
+                      'Umac 🎧',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 24,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              ListTile(
+                title: const Text('Thông tin cá nhân'),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => UserDetailPage(token: widget.token),
+                    ),
+                  );
+                },
+              ),
+              ListTile(
+                title: const Text('Trình phát nhạc'),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        ),
+        appBar: AppBar(
+          title: Text(
+            'Umac 🎧',
+            style: TextStyle(
+              color: Color(0xFF1DB954),
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          centerTitle: true,
+        ),
+        body: MusicPlayer(),
+      ),
+    );
   }
 
   Widget MusicPlayer() {
@@ -181,16 +234,25 @@ class _SongsPageState extends State<SongsPage> {
       return Text('Bài hát chưa được tải');
     }
     return Container(
-      padding: EdgeInsets.all(16),
+      padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Image.network(song.image, width: 200, height: 200, fit: BoxFit.cover),
-          Text(song.name),
+          SizedBox(height: 8),
+          Text(
+            song.name,
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF1DB954),
+            ),
+          ),
           Text(song.singer),
+          SizedBox(height: 8),
           SongSlider(),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               RepeatButton(),
               PreviousButton(),
@@ -199,6 +261,7 @@ class _SongsPageState extends State<SongsPage> {
               RandomButton(),
             ],
           ),
+          Divider(color: Colors.grey),
         ],
       ),
     );
@@ -214,28 +277,32 @@ class _SongsPageState extends State<SongsPage> {
 
         if (processingState == ProcessingState.loading ||
             processingState == ProcessingState.buffering) {
-          return const CircularProgressIndicator();
+          return Container(
+            width: 66,
+            height: 66,
+            child: Center(child: const CircularProgressIndicator()),
+          );
         }
 
         if (playing == false) {
           return IconButton(
             icon: const Icon(Icons.play_circle_filled),
-            iconSize: 80,
-            color: Colors.blue,
+            iconSize: 50,
+            color: Color(0xFF1DB954),
             onPressed: audioPlayer.play,
           );
         } else if (processingState != ProcessingState.completed) {
           return IconButton(
             icon: const Icon(Icons.pause_circle_filled),
-            iconSize: 80,
-            color: Colors.orange,
+            iconSize: 50,
+            color: Colors.black,
             onPressed: audioPlayer.pause,
           );
         } else {
           return IconButton(
             icon: const Icon(Icons.replay_circle_filled),
-            iconSize: 80,
-            color: Colors.grey,
+            iconSize: 50,
+            color: Colors.black,
             onPressed: () {
               audioPlayer.pause();
               audioPlayer.seek(Duration.zero);
@@ -270,7 +337,7 @@ class _SongsPageState extends State<SongsPage> {
         final duration = positionData?.duration ?? Duration.zero;
 
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 15),
           child: ProgressBar(
             progress: position,
             buffered: buffered,
@@ -282,10 +349,10 @@ class _SongsPageState extends State<SongsPage> {
               audioPlayer.play();
             },
 
-            progressBarColor: Colors.red,
+            progressBarColor: Color(0xFF1DB954),
             baseBarColor: Colors.grey.withOpacity(0.24),
             bufferedBarColor: Colors.grey.withOpacity(0.24),
-            thumbColor: Colors.red,
+            thumbColor: Color(0xFF1DB954),
             barHeight: 5.0,
             thumbRadius: 8.0,
             timeLabelLocation: TimeLabelLocation.below,
