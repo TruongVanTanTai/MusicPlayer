@@ -1,9 +1,13 @@
 import 'dart:math';
 
+import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
+import 'package:music_player/models/position-data.dart';
 import 'package:music_player/models/song.dart';
 import 'package:music_player/models/token.dart';
 import 'package:music_player/services/song-service.dart';
+import 'package:rxdart/rxdart.dart';
 
 class SongsPage extends StatefulWidget {
   Token token;
@@ -16,12 +20,16 @@ class SongsPage extends StatefulWidget {
 class _SongsPageState extends State<SongsPage> {
   late SongService songService;
   late Future<List<Song>?> songs;
+  late Song? currentSong;
+  late AudioPlayer audioPlayer;
 
   @override
   void initState() {
     super.initState();
     songService = SongService();
     songs = songService.getSongs(widget.token.accessToken);
+    currentSong = null;
+    audioPlayer = AudioPlayer();
   }
 
   @override
@@ -30,12 +38,7 @@ class _SongsPageState extends State<SongsPage> {
   }
 
   Widget MusicPlayer() {
-    return Column(
-      children: [
-        //SongDetail(),
-        SongsList(),
-      ],
-    );
+    return Column(children: [SongPlayer(currentSong), SongsList()]);
   }
 
   Widget SongsList() {
@@ -77,7 +80,14 @@ class _SongsPageState extends State<SongsPage> {
 
   Widget SongItem(Song song) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        setState(() {
+          currentSong = song;
+          audioPlayer.dispose();
+          audioPlayer = AudioPlayer();
+          audioPlayer.setUrl(song.source);
+        });
+      },
       child: Container(
         padding: EdgeInsets.all(10),
         child: Row(
@@ -95,8 +105,8 @@ class _SongsPageState extends State<SongsPage> {
               borderRadius: BorderRadiusGeometry.circular(6),
               child: Image.network(
                 song.image,
-                width: 100,
-                height: 100,
+                width: 80,
+                height: 80,
                 fit: BoxFit.cover,
               ),
             ),
@@ -124,4 +134,118 @@ class _SongsPageState extends State<SongsPage> {
       ),
     );
   }
+
+  Widget SongPlayer(Song? song) {
+    if (song == null) {
+      return Text('Bài hát chưa được tải');
+    }
+    return Container(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Image.network(song.image, width: 200, height: 200, fit: BoxFit.cover),
+          Text(song.name),
+          Text(song.singer),
+          SongSlider(),
+          ToggleButton(),
+        ],
+      ),
+    );
+  }
+
+  Widget ToggleButton() {
+    return StreamBuilder<PlayerState>(
+      stream: audioPlayer.playerStateStream,
+      builder: (context, snapshot) {
+        final playerState = snapshot.data;
+        final processingState = playerState?.processingState;
+        final playing = playerState?.playing;
+
+        if (processingState == ProcessingState.loading ||
+            processingState == ProcessingState.buffering) {
+          return const CircularProgressIndicator();
+        }
+
+        if (playing == false) {
+          return IconButton(
+            icon: const Icon(Icons.play_circle_filled),
+            iconSize: 80,
+            color: Colors.blue,
+            onPressed: audioPlayer.play,
+          );
+        } else if (processingState != ProcessingState.completed) {
+          return IconButton(
+            icon: const Icon(Icons.pause_circle_filled),
+            iconSize: 80,
+            color: Colors.orange,
+            onPressed: audioPlayer.pause,
+          );
+        } else {
+          return IconButton(
+            icon: const Icon(Icons.replay_circle_filled),
+            iconSize: 80,
+            color: Colors.grey,
+            onPressed: () {
+              audioPlayer.pause();
+              audioPlayer.seek(Duration.zero);
+              audioPlayer.play();
+            },
+          );
+        }
+      },
+    );
+  }
+
+  Stream<PositionData> get _positionDataStream =>
+      Rx.combineLatest3<Duration, Duration, Duration?, PositionData>(
+        audioPlayer.positionStream,
+        audioPlayer.bufferedPositionStream,
+        audioPlayer.durationStream,
+        (position, bufferedPosition, duration) => PositionData(
+          progress: position,
+          buffered: bufferedPosition,
+          duration: duration ?? Duration.zero,
+        ),
+      );
+
+  Widget SongSlider() {
+    return StreamBuilder<PositionData>(
+      stream: _positionDataStream,
+      builder: (context, snapshot) {
+        final positionData = snapshot.data;
+
+        final position = positionData?.progress ?? Duration.zero;
+        final buffered = positionData?.buffered ?? Duration.zero;
+        final duration = positionData?.duration ?? Duration.zero;
+
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: ProgressBar(
+            progress: position,
+            buffered: buffered,
+            total: duration,
+
+            onSeek: (duration) {
+              audioPlayer.pause();
+              audioPlayer.seek(duration);
+              audioPlayer.play();
+            },
+
+            progressBarColor: Colors.red,
+            baseBarColor: Colors.grey.withOpacity(0.24),
+            bufferedBarColor: Colors.grey.withOpacity(0.24),
+            thumbColor: Colors.red,
+            barHeight: 5.0,
+            thumbRadius: 8.0,
+            timeLabelLocation: TimeLabelLocation.below,
+          ),
+        );
+      },
+    );
+  }
+
+  // Widget NextButton() {
+  //   return IconButton(onPressed: () {}, icon: icon);
+  // }
 }
