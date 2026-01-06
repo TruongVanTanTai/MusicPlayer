@@ -1,3 +1,4 @@
+import 'dart:collection';
 import 'dart:math';
 
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
@@ -18,7 +19,8 @@ class SongsPage extends StatefulWidget {
   State<SongsPage> createState() => _SongsPageState();
 }
 
-class _SongsPageState extends State<SongsPage> {
+class _SongsPageState extends State<SongsPage>
+    with SingleTickerProviderStateMixin {
   late SongService songService;
   late Future<List<Song>?> songs;
   late List<Song> catchedSong;
@@ -26,6 +28,7 @@ class _SongsPageState extends State<SongsPage> {
   late AudioPlayer audioPlayer;
   late Random random;
   late bool isRepeated;
+  late AnimationController animationController;
 
   @override
   void initState() {
@@ -35,6 +38,10 @@ class _SongsPageState extends State<SongsPage> {
     currentSong = null;
     random = Random();
     isRepeated = false;
+    animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 10),
+    );
 
     audioPlayer = AudioPlayer();
     audioPlayer.currentIndexStream.listen((index) {
@@ -44,6 +51,20 @@ class _SongsPageState extends State<SongsPage> {
         });
       }
     });
+    audioPlayer.playerEventStream.listen((state) {
+      if (state.playing) {
+        animationController.repeat();
+      } else {
+        animationController.stop();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    audioPlayer.dispose();
+    animationController.dispose();
   }
 
   @override
@@ -71,6 +92,7 @@ class _SongsPageState extends State<SongsPage> {
               ListTile(
                 title: const Text('Thông tin cá nhân'),
                 onTap: () {
+                  audioPlayer.stop();
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -84,6 +106,8 @@ class _SongsPageState extends State<SongsPage> {
                 onTap: () {
                   Navigator.pop(context);
                 },
+                selected: true,
+                textColor: Color(0xFF1DB954),
               ),
             ],
           ),
@@ -187,8 +211,8 @@ class _SongsPageState extends State<SongsPage> {
               borderRadius: BorderRadiusGeometry.circular(6),
               child: Image.network(
                 song.image,
-                width: 80,
-                height: 80,
+                width: 60,
+                height: 60,
                 fit: BoxFit.cover,
               ),
             ),
@@ -238,8 +262,40 @@ class _SongsPageState extends State<SongsPage> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Image.network(song.image, width: 200, height: 200, fit: BoxFit.cover),
-          SizedBox(height: 8),
+          RotationTransition(
+            turns: animationController,
+            child: Container(
+              width: 200,
+              height: 200,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: Colors.black, width: 3),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.3),
+                    blurRadius: 10,
+                    spreadRadius: 5,
+                  ),
+                ],
+                image: DecorationImage(
+                  image: NetworkImage(song.image),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: Center(
+                child: Container(
+                  width: 20,
+                  height: 20,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          // Image.network(song.image, width: 200, height: 200, fit: BoxFit.cover),
+          SizedBox(height: 16),
           Text(
             song.name,
             style: TextStyle(

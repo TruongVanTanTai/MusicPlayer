@@ -51,6 +51,8 @@ class _UserDetailPageState extends State<UserDetailPage> {
                 onTap: () {
                   Navigator.pop(context);
                 },
+                selected: true,
+                textColor: Color(0xFF1DB954),
               ),
               ListTile(
                 title: const Text('Trình phát nhạc'),
